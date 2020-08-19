@@ -11,7 +11,7 @@ estimates ethereum gas price based on recent blocks and provides a simple api
 requires python 3.6 and an ethereum full node. infura.io won't work as it doesn't allow setting up `filter`.
 
 ```bash
-pip install gasprice
+pip install gasprice-blocklytics
 ```
 
 there is an example of systemd service if you want to run it as a service.
@@ -28,6 +28,8 @@ Options:
 ```
 
 ethereum rpc url can be set with `ETH_RPC_URL` environment variable (default `http://localhost:8545`).
+
+number of past blocks to use for prediction window can be set with `WINDOW` environment variable (default `40`).
 
 ## api
 

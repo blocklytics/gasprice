@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='gasprice',
-    version='1.1.5',
+    name='gasprice-blocklytics',
+    version='0.0.1',
     description='predict ethereum gas price',
-    url='https://github.com/banteg/gasprice',
-    author='banteg',
+    url='https://github.com/blocklytics/gasprice',
+    author='blocklytics',
     py_modules=[
         'gas_price',
     ],

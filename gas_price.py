@@ -14,7 +14,7 @@ from retry import retry
 
 ETH_RPC_URL = os.environ.get('ETH_RPC_URL', 'http://localhost:8545')
 QUANTILES = dict(slow=35, standard=60, fast=90, instant=100)
-WINDOW = 200
+WINDOW = int(os.environ.get('WINDOW', '40'))
 
 
 w3 = Web3(HTTPProvider(ETH_RPC_URL))
@@ -69,7 +69,9 @@ def process_block(n):
         stats['block_time'] = round(mean(b - a for a, b in zip(t, t[1:])), 3)
 
     if block.transactions:
-        blocks_gwei.append(min(tx.gasPrice for tx in block.transactions))
+        for tx in block.transactions:
+            if tx.from != block.miner:
+                blocks_gwei.append(min(tx.gasPrice))
         data = pd.Series(blocks_gwei)
         for name, q in QUANTILES.items():
             price = data.quantile(q / 100)
